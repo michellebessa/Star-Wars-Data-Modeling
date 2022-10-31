@@ -16,6 +16,8 @@ class User(Base):
     firstname = Column(String(250), nullable=False)
     lastname = Column(String(250), nullable=False)
     email = Column(String(250), nullable=False)
+    user_id = Column(ForeignKey('Favorites.id'))
+
 
 
 class Character(Base):
@@ -29,6 +31,8 @@ class Character(Base):
     eye_color = Column(String(250), nullable=True)
     birth_year = Column(Integer, nullable=True)
     gender = Column(String(250), nullable=True)
+    planets_id = Column(ForeignKey('Planets.id'))
+    vehicles_id = Column(ForeignKey('Vehicles.id'))
 
 
 class Planets(Base):
@@ -43,6 +47,7 @@ class Planets(Base):
     terrain = Column(String(250), nullable=True)
     surface_water = Column(Integer, nullable=True)
     population = Column(Integer, nullable=True)
+    character_id = Column(ForeignKey('Character.id'))
 
 
 class Vehicles(Base):
@@ -57,13 +62,15 @@ class Vehicles(Base):
     crew = Column(Integer, nullable=True)
     passengers = Column(Integer, nullable=True)
     cargo_capacity = Column(Integer, nullable=True)
+    character_id = Column(ForeignKey('Character.id'))
 
 
 class Favorites(Base):
     __tablename__ = 'Favorites'
     id = Column(Integer, primary_key=True)
-    user_id = Column(ForeignKey('User.id'))
     favorite_name = Column(String(250), nullable=False)
+    user_id = Column(ForeignKey('User.id'))
+    character_id = Column(ForeignKey('Character.id'))
 
     def to_dict(self):
         return {}
