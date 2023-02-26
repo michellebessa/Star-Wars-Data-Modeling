@@ -16,7 +16,7 @@ class User(Base):
     firstname = Column(String(250), nullable=False)
     lastname = Column(String(250), nullable=False)
     email = Column(String(250), nullable=False)
-    user_id = Column(ForeignKey('Favorites.id'))
+    favorites_id = Column(ForeignKey('Favorites.id'))
 
 
 
